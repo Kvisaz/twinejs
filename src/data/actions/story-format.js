@@ -20,7 +20,6 @@ const actions = (module.exports = {
 	deleteFormat({dispatch}, id) {
 		dispatch('DELETE_FORMAT', id);
 	},
-
 	createFormatFromUrl(store, url) {
 		return new Promise((resolve, reject) => {
 			jsonp(url, {name: 'storyFormat', timeout: 2000}, (err, data) => {
@@ -177,6 +176,12 @@ const actions = (module.exports = {
 
 		const builtinFormats = [
 			{
+				name: 'Wonder',
+				url: 'story-formats/wonder-0.6.9/format.js',
+				version: '0.6.9',
+				userAdded: false
+			},
+			{
 				name: 'Chapbook',
 				url: 'story-formats/chapbook-1.0.0/format.js',
 				version: '1.0.0',
@@ -253,7 +258,7 @@ const actions = (module.exports = {
 			setPref(
 				store,
 				'defaultFormat',
-				{ name: 'Harlowe', version: '3.1.0' }
+				{name: 'Wonder', version: '0.6.9'}
 			);
 		}
 

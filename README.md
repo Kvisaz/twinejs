@@ -1,7 +1,16 @@
-## twinejs
+## Twine JS Forked by Kvisaz
 
-by Chris Klimas, Leon Arnott, Daithi O Crualaoich, Ingrid Cheung, Thomas Michael
-Edwards, Micah Fitch, Juhana Leinonen, Michael Savich, and Ross Smith
+Hi, it`s unofficial fork of [Klembot TwineJS](https://github.com/klembot/twinejs)
+
+Please, dont use my fork - it`s very, very experimental project. Use Klembot version!
+
+I use it for learning and custom features for my project:
+- another default Twine format (custom and experimental too!)
+
+
+## MyNotes
+
+[My notes in Russian](MyNotes.md)
 
 ### SYNOPSIS
 

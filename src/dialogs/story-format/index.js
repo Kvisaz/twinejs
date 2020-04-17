@@ -80,12 +80,12 @@ module.exports = Vue.extend({
 				var result = state.storyFormat.formats.map(
 					format => ({ name: format.name, version: format.version })
 				);
-				
+
 				result.sort((a, b) => {
 					if (a.name < b.name) {
 						return -1;
 					}
-					
+
 					if (a.name > b.name) {
 						return 1;
 					}
