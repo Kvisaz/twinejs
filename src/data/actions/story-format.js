@@ -177,8 +177,8 @@ const actions = (module.exports = {
 		const builtinFormats = [
 			{
 				name: 'Wonder',
-				url: 'story-formats/wonder-0.6.9/format.js',
-				version: '0.6.9',
+				url: 'story-formats/wonder-0.6.19/format.js',
+				version: '0.6.19',
 				userAdded: false
 			},
 			{
@@ -258,7 +258,7 @@ const actions = (module.exports = {
 			setPref(
 				store,
 				'defaultFormat',
-				{name: 'Wonder', version: '0.6.9'}
+				{name: 'Wonder', version: '0.6.19'}
 			);
 		}
 
