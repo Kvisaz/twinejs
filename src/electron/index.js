@@ -22,7 +22,7 @@ const browserWindowOpts = {
 	height: 600,
 	webPreferences: {
 		nodeIntegration: false,
-		preload: path.resolve(__dirname, './preload.js')
+		preload: path.join(app.getAppPath(), 'preload.js')
 	}
 };
 
@@ -122,7 +122,7 @@ app.on('ready', () => {
 				app.quit();
 			});
 
-			win.loadFile('dist/web-electron/index.html');
+			win.loadFile('web-electron/index.html');
 		})
 		.catch(e => {
 			dialog.showMessageBox(

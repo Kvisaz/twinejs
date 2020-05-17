@@ -21,7 +21,7 @@ module.exports = function(prefs) {
 
 			const localePath = path.resolve(
 				__dirname,
-				`../../dist/web-electron/locale/${localeName}.js`
+				`web-electron/locale/${localeName}.js`
 			);
 
 			fs.readFile(localePath, {encoding: 'utf8'})

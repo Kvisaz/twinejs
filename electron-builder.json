@@ -1,5 +1,8 @@
 {
-	"directories": {"output": "dist/electron"},
+	"directories": {
+		"app": "dist",
+		"output": "build"
+	},
 	"forceCodeSigning": false,
 	"win": {
 		"icon": "icons/app.ico",

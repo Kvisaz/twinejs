@@ -6,12 +6,12 @@
 	"license": "GPL-3.0",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/klembot/twinejs"
+		"url": "https://github.com/Kvisaz/twinejs"
 	},
-	"browserslist": "iOS 1-12, last 2 versions",
-	"main": "src/electron/index.js",
+	"browserslist": "defaults",
+	"main": "dist/index.js",
 	"scripts": {
-		"build": "npm-run-all -l --parallel build:electron --serial build:build-number",
+		"build": "npm run build:electron",
 		"build_old": "npm-run-all -l --parallel build:cdn build:electron build:web --serial build:build-number",
 		"build:build-number": "node scripts/build-number.js",
 		"build:cdn": "cross-env NODE_ENV=production USE_CDN=y webpack",
