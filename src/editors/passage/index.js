@@ -2,7 +2,6 @@
 A modal dialog for editing a single passage.
 */
 
-const CodeMirror = require('codemirror');
 const Vue = require('vue');
 const locale = require('../../locale');
 const { thenable } = require('../../vue/mixins/thenable');
@@ -10,17 +9,7 @@ const { changeLinksInStory, updatePassage } = require('../../data/actions/passag
 const { loadFormat } = require('../../data/actions/story-format');
 const { passageDefaults } = require('../../data/store/story');
 
-require('codemirror/addon/display/placeholder');
-require('codemirror/addon/hint/show-hint');
-require('../../codemirror/prefix-trigger');
-
 require('./index.less');
-
-/*
-Expose CodeMirror to story formats, currently for Harlowe compatibility.
-*/
-
-window.CodeMirror = CodeMirror;
 
 module.exports = Vue.extend({
 	template: require('./index.html'),
@@ -72,7 +61,7 @@ module.exports = Vue.extend({
 					passage.id !== this.passage.id
 			));
 		},
-		
+
 		autocompletions() {
 			return this.parentStory.passages.map(passage => passage.name);
 		}

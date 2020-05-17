@@ -10,7 +10,6 @@
 	</p>
 
 	<!-- Весь этот компонент тормозит на большой схем -->
-	<div class="expand">
-		<code-mirror :options="cmOptions" :text="passage.text" @cm-change="saveText" v-ref:codemirror></code-mirror>
-	</div> <!-- .fullEdit -->
+	<textarea class="expand" v-model=passage.text></textarea>
+
 </modal-dialog>
