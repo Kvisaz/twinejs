@@ -2,6 +2,7 @@ const Cursor = require('./Cursor');
 
 let isMouseScrolling = false;
 let isMouseScrollReady = false;
+let isPassageEditing = false;
 
 module.exports = {
     isMouseScrollReady() {
@@ -32,5 +33,23 @@ module.exports = {
 
     stopMarqueeing() {
         Cursor.setNormal();
-    }
+    },
+
+    /********************************
+     *  Passage Mode
+     *******************************/
+
+    isPassageEditing(){
+        return isPassageEditing;
+    },
+
+    startPassageEditing(){
+        isPassageEditing = true;
+    },
+
+    stopPassageEditing(){
+        isPassageEditing = false;
+    },
+
+
 }

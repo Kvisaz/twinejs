@@ -43,6 +43,7 @@ module.exports = {
 
 				function handleKeyDown(e) {
 					/* Space bar */
+					if(KvisazUi.isPassageEditing()) return;
 
 					if (e.which === 32) {
 						if (!scrolling && !spaceHeld) {
@@ -64,15 +65,15 @@ module.exports = {
 				}
 
 				function handleMouseDown(e) {
-					if (e.which === 2 && !scrolling) { // Middle button
-						beginScrolling(e);
-					}
+					const isLeftButton = e.which === 1 && spaceHeld;
+					const isMiddleButton = e.which === 2;
+					const isButton = isLeftButton || isMiddleButton;
+					if(!isButton) return;
+					if(scrolling) return;
 
-					if (e.which === 1 && spaceHeld) { // Left button
-						if (!scrolling) {
-							beginScrolling(e);
-						}
-					}
+					if(KvisazUi.isPassageEditing()) return;
+
+					beginScrolling(e);
 				}
 
 				function handleMouseMove(e) {
@@ -85,6 +86,7 @@ module.exports = {
 				}
 
 				function handleKeyUp(e) {
+					if(KvisazUi.isPassageEditing()) return;
 					if (e.which === 32 && spaceHeld) {
 						scrolling = spaceHeld = false;
 

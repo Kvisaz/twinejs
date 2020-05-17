@@ -19,6 +19,8 @@ const {
 
 require('./index.less');
 
+const KvisazUi = require('../../kvisaz/Ui');
+
 module.exports = Vue.extend({
 	template: require('./index.html'),
 
@@ -27,7 +29,7 @@ module.exports = Vue.extend({
 			type: Object,
 			required: true
 		},
-		
+
 		parentStory: {
 			type: Object,
 			required: true
@@ -120,7 +122,7 @@ module.exports = Vue.extend({
 					: null
 			};
 		},
-		
+
 		cssClasses() {
 			let result = [];
 
@@ -164,6 +166,7 @@ module.exports = Vue.extend({
 		},
 
 		edit() {
+			KvisazUi.startPassageEditing();
 			/*
 			Close any existing passage menu -- it may still be visible if the
 			user double-clicked.
@@ -179,6 +182,8 @@ module.exports = Vue.extend({
 					oldText,
 					this.gridSize
 				);
+
+				KvisazUi.stopPassageEditing();
 			};
 
 			/*
@@ -209,7 +214,7 @@ module.exports = Vue.extend({
 			if (e.type === 'mousedown' && e.which !== 1) {
 				return;
 			}
-			
+
 			if (e.shiftKey || e.ctrlKey) {
 				/*
 				Shift- or control-clicking toggles our selected status, but
@@ -307,7 +312,7 @@ module.exports = Vue.extend({
 			user may be starting a drag; but now that we know for sure that the
 			user didn't intend this, we select just this one.
 			*/
-			
+
 			if (this.dragXOffset === 0 && this.dragYOffset === 0) {
 				if (!(e.ctrlKey || e.shiftKey)) {
 					this.selectPassages(this.parentStory.id, p => p !== this);
@@ -387,8 +392,8 @@ module.exports = Vue.extend({
 				const top = this.passage.top + yOffset
 				/ this.parentStory.zoom;
 				const left = this.passage.left + xOffset
-				/ this.parentStory.zoom; 
-				
+				/ this.parentStory.zoom;
+
 				if (this.passage.top !== top || this.passage.left !== left) {
 					this.updatePassage(
 						this.parentStory.id,

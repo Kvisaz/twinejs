@@ -8,6 +8,8 @@ const domEvents = require('../../vue/mixins/dom-events');
 const { thenable, symbols: { reject, resolve } } =
 	require('../../vue/mixins/thenable');
 
+const KvisazUi = require('../../kvisaz/Ui');
+
 const animationEndEvents = [
 	'animationend',
 	'webkitAnimationEnd',
@@ -113,6 +115,7 @@ const ModalDialog = module.exports = Vue.extend({
 		},
 
 		escapeCloser(e) {
+			if(KvisazUi.isPassageEditing()) return;
 			if (e.keyCode === 27) {
 				e.preventDefault();
 				this.close();

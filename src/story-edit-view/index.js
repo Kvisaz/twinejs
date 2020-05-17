@@ -13,6 +13,8 @@ const zoomSettings = require('./zoom-settings');
 
 require('./index.less');
 
+const KvisazUi = require('../kvisaz/Ui');
+
 /*
 A memoized, sorted array of zoom levels used when zooming in or out.
 */
@@ -71,7 +73,7 @@ module.exports = Vue.extend({
 		* the size of the browser window
 		* the minimum amount of space needed to enclose all existing
 		passages
-		
+
 		... whichever is bigger, plus 50% of the browser window's
 		width and height, so that there's always room for the story to
 		expand.
@@ -173,7 +175,7 @@ module.exports = Vue.extend({
 				Change the window's scroll position so that the same logical
 				coordinates are at its center.
 				*/
-				
+
 				const halfWidth = window.innerWidth / 2;
 				const halfHeight = window.innerHeight / 2;
 				const logCenterX = (window.scrollX + halfWidth) / old;
@@ -296,7 +298,7 @@ module.exports = Vue.extend({
 			Then position it so it doesn't overlap any others, and save it
 			again.
 			*/
-			
+
 			this.positionPassage(
 				this.story.id,
 				this.story.passages.find(p => p.name === name).id,
@@ -309,13 +311,13 @@ module.exports = Vue.extend({
 		webkitmouseforcedown event. At the time of writing, this is a
 		Mac-specific feature, but can be extended once standards catch up.
 		*/
-		
+
 		onMouseForceDown(e) {
 			let top = (e.pageY / this.story.zoom) -
 				(passageDefaults.height / 2);
 			let left = (e.pageX / this.story.zoom) -
 				(passageDefaults.width / 2);
-			
+
 			this.createPassage(null, top, left);
 		},
 
@@ -340,6 +342,7 @@ module.exports = Vue.extend({
 		},
 
 		onKeyup(e) {
+			if(KvisazUi.isPassageEditing()) return;
 			/*
 			If the key is going anywhere (e.g. into a text field), disregard it.
 			*/
@@ -360,7 +363,7 @@ module.exports = Vue.extend({
 				case 187:
 					this.zoomOut();
 					break;
-				
+
 				/* Minus key */
 
 				case 189:
@@ -408,7 +411,7 @@ module.exports = Vue.extend({
 		'highlight-regexp-change'(value) {
 			this.highlightRegexp = value;
 		},
-		
+
 		/*
 		A hook into our createPassage() method for child components.
 		*/
