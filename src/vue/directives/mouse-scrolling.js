@@ -5,6 +5,7 @@ space bar and left button).
 */
 
 const ui = require('../../ui');
+const KvisazUi = require('../../kvisaz/Ui');
 
 require('./mouse-scrolling.less');
 
@@ -35,7 +36,8 @@ module.exports = {
 					mouseOrigin = [e.clientX, e.clientY];
 					scrollOrigin = [window.pageXOffset, window.pageYOffset];
 					scrolling = true;
-					body.classList.add('mouseScrolling');
+					KvisazUi.startMouseScrolling()
+
 					e.preventDefault();
 				}
 
@@ -45,7 +47,7 @@ module.exports = {
 					if (e.which === 32) {
 						if (!scrolling && !spaceHeld) {
 							spaceHeld = true;
-							body.classList.add('mouseScrollReady');
+							KvisazUi.startReadyMouseScrolling();
 						}
 
 						/*
@@ -85,8 +87,8 @@ module.exports = {
 				function handleKeyUp(e) {
 					if (e.which === 32 && spaceHeld) {
 						scrolling = spaceHeld = false;
-						body.classList.remove('mouseScrollReady', 'mouseScrolling');
 
+						KvisazUi.stopMouseScrolling();
 						/*
 						Prevent the space bar from scrolling the window
 						down. We have to make sure that by doing so, we
@@ -104,7 +106,7 @@ module.exports = {
 				function handleMouseUp(e) {
 					if ((e.which === 2 || e.which === 1) && scrolling) {
 						scrolling = false;
-						body.classList.remove('mouseScrolling');
+						KvisazUi.stopMouseScrolling();
 						e.preventDefault();
 					}
 				}

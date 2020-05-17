@@ -8,6 +8,8 @@ const { selectPassages } = require('../../data/actions/passage');
 require('../../ui/ie-mouse-event-polyfill');
 require('./index.less');
 
+const KvisazUi = require('../../kvisaz/Ui');
+
 module.exports = Vue.extend({
 	template: require('./index.html'),
 
@@ -119,7 +121,7 @@ module.exports = Vue.extend({
 			*/
 
 			if (e.target.nodeName !== 'svg' || e.which !== 1 ||
-				document.body.classList.contains('mouseScrollReady')) {
+				KvisazUi.isMouseScrollReady()) {
 				return;
 			}
 
@@ -138,15 +140,18 @@ module.exports = Vue.extend({
 			}
 
 			this.visible = true;
-			document.body.classList.add('marqueeing');
-			
+
+			KvisazUi.setMarqueeing();
+
 			/*
 			Set up coordinates initially. clientX and clientY don't take
 			into account the window's scroll position.
 			*/
 
-			this.startX = this.currentX = e.clientX + window.pageXOffset;
-			this.startY = this.currentY = e.clientY + window.pageYOffset;
+			requestAnimationFrame(()=>{
+				this.startX = this.currentX = e.clientX + window.pageXOffset;
+				this.startY = this.currentY = e.clientY + window.pageYOffset;
+			})
 
 			/*
 			Set up event listeners to continue the drag.
@@ -171,8 +176,10 @@ module.exports = Vue.extend({
 			window's scroll position.
 			*/
 
-			this.currentX = e.clientX + window.pageXOffset;
-			this.currentY = e.clientY + window.pageYOffset;
+			requestAnimationFrame(()=>{
+				this.currentX = e.clientX + window.pageXOffset;
+				this.currentY = e.clientY + window.pageYOffset;
+			})
 
 			this.selectPassages(this.story.id, p => {
 				if (this.additive &&
@@ -190,7 +197,7 @@ module.exports = Vue.extend({
 			if (e.which !== 1) {
 				return;
 			}
-			
+
 			/*
 			If the user never actually moved the mouse (e.g. this was a
 			single click in the story map), deselect everything.
@@ -202,7 +209,9 @@ module.exports = Vue.extend({
 			}
 
 			this.visible = false;
-			document.querySelector('body').classList.remove('marqueeing');
+
+			KvisazUi.stopMarqueeing();
+
 
 			/* Deactivate the event listeners we had been using. */
 
