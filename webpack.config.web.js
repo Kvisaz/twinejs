@@ -10,6 +10,10 @@ const isRelease = process.env.NODE_ENV === 'production';
 const useElectron = process.env.USE_ELECTRON === 'y';
 const useCdn = process.env.USE_CDN !== null;
 
+const SRC = path.join(__dirname, "src");
+const DIST = path.join(__dirname, "dist");
+const DIR_NODE = path.join(__dirname, "node_modules");
+
 console.log(`useCdn = ${useCdn}`)
 console.log(`useElectron = ${useElectron}`)
 
@@ -20,7 +24,7 @@ console.log(`OUT_PATH = ${OUT_WEB_PATH}`);
 const config = (module.exports = {
 	mode: isRelease ? 'production' : 'development',
 	entry: './src/index.js',
-	target: 'electron-renderer',
+	target: useElectron ? 'electron-renderer' : 'web',
 	output: {
 		path: path.join(
 			__dirname,
@@ -28,6 +32,13 @@ const config = (module.exports = {
 			OUT_WEB_PATH
 		),
 		filename: 'twine.js'
+	},
+	resolve: {
+		extensions: ['.js'],
+		modules: [
+			SRC,
+			DIR_NODE
+		]
 	},
 	module: {
 		rules: [
