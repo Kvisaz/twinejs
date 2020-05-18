@@ -182,29 +182,7 @@ module.exports = Vue.extend({
 				this.$options.storyFormat.version
 			).then(format => {
 				let modeName = format.name.toLowerCase();
-
-				/* TODO: Resolve this special case with PR #118 */
-
-				if (modeName === 'harlowe') {
-					modeName += `-${/^\d+/.exec(format.version)}`;
-				}
-
-				if (modeName in CodeMirror.modes) {
-					/*
-					This is a small hack to allow modes such as Harlowe to
-					access the full text of the textarea, permitting its lexer
-					to grow a syntax tree by itself.
-					*/
-
-					CodeMirror.modes[modeName].cm = this.$refs.codemirror.$cm;
-
-					/*
-					Now that's done, we can assign the mode and trigger a
-					re-render.
-					*/
-
-					this.$refs.codemirror.$cm.setOption('mode', modeName);
-				}
+				console.log('loadFormat', format.name);
 			});
 		}
 
@@ -213,19 +191,6 @@ module.exports = Vue.extend({
 		it fulfils.
 		*/
 
-		this.$refs.codemirror.$cm.setOption('mode', 'text');
-
-		/*
-		Either move the cursor to the end or select the existing text, depending
-		on whether this passage has only default text in it.
-		*/
-
-		if (this.passage.text === passageDefaults.text) {
-			this.$refs.codemirror.$cm.execCommand('selectAll');
-		}
-		else {
-			this.$refs.codemirror.$cm.execCommand('goDocEnd');
-		}
 	},
 
 	destroyed() {
@@ -233,7 +198,7 @@ module.exports = Vue.extend({
 	},
 
 	components: {
-		'code-mirror': require('../../vue/codemirror'),
+		//'code-mirror': require('../../vue/codemirror'),
 		'modal-dialog': require('../../ui/modal-dialog'),
 		'tag-editor': require('./tag-editor')
 	},

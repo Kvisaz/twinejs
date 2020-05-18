@@ -8,6 +8,8 @@
 		case-sensitive
 	callback - the function that will be called
 
+ 2020-05-18: - This conception absolutely unusable on big stories
+
  @class CodeMirror.prefixTrigger
 **/
 
