@@ -122,6 +122,7 @@ module.exports = Vue.extend({
 		},
 
 		saveText(text) {
+			console.log('saveText');
 			this.updatePassage(
 				this.parentStory.id,
 				this.passage.id,
@@ -130,6 +131,7 @@ module.exports = Vue.extend({
 		},
 
 		saveTags(tags) {
+			console.log('saveTags');
 			this.updatePassage(
 				this.parentStory.id,
 				this.passage.id,
@@ -138,10 +140,16 @@ module.exports = Vue.extend({
 		},
 
 		dialogDestroyed() {
+			console.log('dialogDestroyed');
+			const textarea = document.getElementById('passageEditModalTextArea');
+			console.log('dialogDestroyed textarea.value =', textarea.value);
+			this.saveText(textarea.value);
+
 			this.$destroy();
 		},
 
 		canClose() {
+			console.log('canClose');
 			if (this.userPassageNameValid) {
 				if (this.userPassageName !== this.passage.name) {
 					this.changeLinksInStory(
