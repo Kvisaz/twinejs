@@ -136,7 +136,7 @@ const storyStore = (module.exports = {
 			name provided), even if you rename one to a name a previous one used
 			to have.
 			*/
-			
+
 			let story = getStoryById(state, storyId);
 			let newPassage = Object.assign(
 				{
@@ -167,8 +167,6 @@ const storyStore = (module.exports = {
 			}
 
 			story.lastUpdate = new Date();
-			console.log(story);
-			console.log(story.passages);
 		},
 
 		UPDATE_PASSAGE_IN_STORY(state, storyId, passageId, props) {
