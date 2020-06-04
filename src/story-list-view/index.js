@@ -133,13 +133,13 @@ module.exports = Vue.extend({
 		app update...
 		*/
 
-		if (
+		/*if (
 			!this.appearFast &&
 			!checkForDonation(this.$store) &&
 			isElectron()
 		) {
 			checkForAppUpdate(this.$store);
-		}
+		}*/
 
 		/*
 		And if the user had been previously editing a story (as the router will
