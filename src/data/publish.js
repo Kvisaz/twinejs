@@ -102,10 +102,10 @@ const publish = module.exports = {
 		});
 
 		const tagData = Object.keys(story.tagColors).map(tag =>
-			`<tw-tag name="${escape(tag)}" color="${escape(story.tagColors[tag])}"></tw-tag>`
+			`\n<tw-tag name="${escape(tag)}" color="${escape(story.tagColors[tag])}"></tw-tag>\n`
 		);
 
-		return `<tw-storydata name="${escape(story.name)}" ` +
+		return `\n\n<tw-storydata name="${escape(story.name)}" ` +
 			`startnode="${startLocalId || ''}" ` +
 			`creator="${escape(appInfo.name)}" ` +
 			`creator-version="${escape(appInfo.version)}" ` +
@@ -119,7 +119,7 @@ const publish = module.exports = {
 			`<script role="script" id="twine-user-script" ` +
 			`type="text/twine-javascript">` + story.script + `</script>` +
 			tagData + passageData +
-			`</tw-storydata>`;
+			`</tw-storydata>\n`;
 	},
 
 	/*
@@ -128,11 +128,11 @@ const publish = module.exports = {
 	*/
 
 	publishPassage(passage, localId) {
-		return `<tw-passagedata pid="${escape(localId)}" ` +
+		return `\n\n<tw-passagedata pid="${escape(localId)}" ` +
 			`name="${escape(passage.name)}" ` +
 			`tags="${escape(passage.tags.join(' '))}" ` +
 			`position="${passage.left},${passage.top}" ` +
 			`size="${passage.width},${passage.height}">` +
-			`${escape(passage.text)}</tw-passagedata>`;
+			`${escape(passage.text)}</tw-passagedata>\n`;
 	}
 };
